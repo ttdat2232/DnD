@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    color: rgb(255, 204, 122);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url('/Resources/Img/wallpaperflare.com_wallpaper.jpg');
+    
+}
+
+header img {
+    display: block;
+    margin: 0 auto;
+    padding-top: 5px;
+    margin-bottom: 15px;
+}
+
+.category {
+    display: flex;
+    justify-content: space-around;
+}
+
+.category .topic {
+    width: 300px;
+}
+
+.category .topic h3 { 
+    text-align: center;
+}
+
+.category .category-items {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.category .category-items .item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+
+.category .category-items .item p {
+    font-size: 16px;
+}
+
+/* .category .category-items .item p {
+
+}
+
+.category .first {
+}
+
+.category .second {
+}
+
+.category .third {
+
+} */
+
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
