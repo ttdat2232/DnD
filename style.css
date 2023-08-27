@@ -1,0 +1,23 @@
+body {
+    background-image: url("./Img/wallpaperflare.com_wallpaper.jpg")
+}
+.container {
+    height: 100vh;
+}
+table {
+    width: 100%;
+    height: 85%;
+    color: white;
+    background-color: rgba(0, 0,  0, 0.8);
+}
+table>tbody>tr:hover {
+    cursor: pointer;
+    background-color: rgba(38, 255, 0, 0.437);
+}
+
+.audio-controls {
+    margin-top: 1px;
+    color: white;
+    background-color: rgba(28, 28, 28, 0.8);
+    height: 13%;
+}

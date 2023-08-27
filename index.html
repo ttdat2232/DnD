@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link href="/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container pt-2">
+        <table >
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th hidden="hidden"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="chooseMusic(this)">
+                    <td>Combat</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\combat.mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Fizz The Lucky Kraken (Part 3 of 6).mp3</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Fizz The Lucky Kraken (Part 3 of 6).mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Bilgewater Board Soundtrack</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Legends of Runeterra - Bilgewater Board Soundtrack.mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Medieval Fantasy Music – Medieval Market</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Medieval Fantasy Music – Medieval Market.mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Nautilus The Ophidian (Part 2 of 6)</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Nautilus The Ophidian (Part 2 of 6).mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Never Turn Your Back on the Sea (Part 6 of 6)</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Never Turn Your Back on the Sea (Part 6 of 6).mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Pyke the Drowned Man (Part 5 of 6)</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Pyke the Drowned Man (Part 5 of 6).mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Tahm Kench  The Gambler’s Woe (Part 4 of 6)</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Tahm Kench  The Gambler’s Woe (Part 4 of 6).mp3</td>
+                </tr>
+                <tr onclick="chooseMusic(this)">
+                    <td>Tall Tales of the Deep Sea (Part 1 of 6)</td>
+                    <td hidden="hidden">.\Sound\Darktides of Bilgewater\mp3\Tall Tales of the Deep Sea (Part 1 of 6).mp3</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="audio-controls">
+            <p id="playing-name"></p>
+            <button id="play-button" class="btn btn-primary" onclick="playOrPause()">Play</button>
+            <input id="duration" type="range" min ='0' oninput="changeCurrentTime(this)"/>
+            <span id="audio-time"></span>
+        </div>
+    </div>
+    <script>
+        var audio;
+        var isPlayed = false;
+        function chooseMusic(value) {
+            if(audio) {
+                audio = null
+                isPlayed = false;
+            }
+            audio = new Audio(value.children[1].innerText);
+            document.getElementById('playing-name').innerText = value.children[0].innerText;
+            audio.onloadeddata = function () {
+                document.getElementById('duration').max = audio.duration;
+            }
+            audio.onloadedmetadata = function() {
+                playOrPause();
+            }
+            audio.onplaying = function() {
+                let duration = new Date(audio.duration * 1000).toISOString().substr(14, 5);
+                let currentTime = new Date(audio.currentTime * 1000).toISOString().substr(14, 5);
+                document.getElementById('audio-time').innerText = audio + "/" + duration;
+            }
+            audio.ontimeupdate = function () {
+                let duration = new Date(audio.duration * 1000).toISOString().substr(14, 5);
+                let currentTime = new Date(audio.currentTime * 1000).toISOString().substr(14, 5);
+                document.getElementById('audio-time').innerText = currentTime + "/" + duration;
+                document.getElementById('duration').value = audio.currentTime;
+            }
+        }
+        
+        function changeCurrentTime(inputRange) {
+            audio.currentTime = inputRange.value;
+            audio.play();
+        }
+        
+        function playOrPause() {
+            var btnPlay = document.getElementById('play-button');
+            if(isPlayed) {
+                btnPlay.innerText = "Play";
+                audio.pause();
+            } else {
+                btnPlay.innerText = "Pause";
+                audio.play();
+            }
+            isPlayed = !isPlayed;
+        }
+    </script>
+</body>
+</html> 
